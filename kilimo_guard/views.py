@@ -23,13 +23,16 @@ def predict(request):
     try:                                     
         # Get user input from the form            
         crop_type = request.data.get("crop_type")
-        temperature = float(request.data.get("temperature"))
         date = pd.to_datetime(request.data.get("date"))
+        # location
+
+        # Get this through API
+        temperature = float(request.data.get("temperature"))
         rainfall = float(request.data.get("rainfall"))
         humidity = float(request.data.get("humidity"))
         wind_speed = float(request.data.get("wind_speed"))
-        soil_moisture = float(request.data.get("soil_moisture"))
-
+        soil_moisture = float(request.data.get("soil_moisture"))        
+        
         # Create a DataFrame from user input
         user_input = {
             'date': [date],
