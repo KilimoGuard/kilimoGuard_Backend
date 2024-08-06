@@ -1,7 +1,0 @@
-*.pyc
-.env
-.autogit
-__pycache__
-.DS_Store
-virtual
-.vercel
