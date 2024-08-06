@@ -1,21 +1,18 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "kilimo_project/wsgi.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb" }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/static/(.*)",
-        "dest": "/static/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "kilimo_project/wsgi.py"
-      }
-    ]
-  }
-  
+  "build": {
+    "env": {
+      "DJANGO_SETTINGS_MODULE": "kilimo_project.settings.production"
+    },
+    "cmd": "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+  },
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "index.html"
+    }
+  ]
+}
