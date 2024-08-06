@@ -15,7 +15,7 @@ KilimoGuard is an innovative Pest Prediction and Management System designed to a
 
 * **kilimo_guard/**: This is where the application logic is written. Contains all API end point for Kilimo Guard.
 * **kilimo_project/**: This is the main project directory which contains the settings and configuration for the entire Django project.
-* **media/**: This directory is used to store user-uploaded files.
+* **media/**: This directory is used to store custom files such the datasets for the AI model and user-uploaded files.
 * **static/**: This directory is for storing static files such as CSS, JavaScript, and images
 * **.env**: This file contains environment variables for the project, such as database credentials, secret keys, and other configuration settings that shouldn't be hard-coded in the codebase.
 * **.env_example**: A sample environment file to show what kind of environment variables are needed. It's a template for creating the `.env` file.
