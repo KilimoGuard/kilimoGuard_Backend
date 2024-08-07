@@ -44,6 +44,27 @@ This guide will help you understand our workflow and how you can contribute effe
    - Fix the issue, open a PR, and merge after review and testing.
    - Merge the hotfix branch into `develop` to include the fix in future development.
 
+## Pushing Changes
+
+Before pushing any change to the repository:-
+1. Please make sure you have no uncommited code.
+2. Checkout to main branch and pull it to update it.
+3. Once done, checkout to your branch and rebase it with main branch. Use the command below to rebase:-
+   ```sh
+   git rebase main   
+   ```
+4. Resolve any merge conflicts and then push your branch to the repository.
+   ```sh
+   git push origin bg-your-feature-name
+   ```
+
+## Submitting a Pull Request
+
+1. **Create a pull request**: Go to the repository and click on the "Pull Request" button. Provide a clear and descriptive title for your pull request. In the description, explain what changes you have made and why. Make sure add a reviewer from the top right section.
+2. **Review process**: The reviewer will review your pull request. They may ask for changes or provide feedback. Please be responsive to their comments.
+3. **Merge**: Once your pull request is approved, it will be merged into the main branch.
+
+
 ## Contribution Guidelines
 
 - **Issues:** Use GitHub Issues to track tasks, bugs, and feature requests. Assign issues to team members and link them to PRs.
