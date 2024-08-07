@@ -5,3 +5,4 @@ __pycache__
 .DS_Store
 virtual
 .vercel
+.idea/
