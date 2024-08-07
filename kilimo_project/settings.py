@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
+import mongoengine
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     "corsheaders",    
     "rest_framework",           
     'rest_framework.authtoken',
+    'rest_framework_mongoengine',   
 
     "django.contrib.admin",
     "django.contrib.auth",
@@ -103,13 +105,9 @@ WSGI_APPLICATION = "kilimo_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
+MONGO_DB_NAME = config("MONGO_DB_NAME")
+MONGO_DB_URI = config("MONGO_DB_URI")
+mongoengine.connect(host=config("MONGO_DB_URI")+"/"+MONGO_DB_NAME, ssl=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
