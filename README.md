@@ -45,8 +45,8 @@ cd kilimoGuard_Backend
 3. Create and activate a virtual environment:
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv virtual
+source virtual/bin/activate
 ```
 
 4. Install the required dependencies:
@@ -67,7 +67,7 @@ or you could use the bash script __start.sh__ after making it executable once by
 ./start.sh
 ```
 
-2. Access the application through your web browser at `http://127.0.0.1:8000`.
+2. Access the application through your web browser at ` http://0.0.0.0:8070/`.
 
 ## Contributing
 
