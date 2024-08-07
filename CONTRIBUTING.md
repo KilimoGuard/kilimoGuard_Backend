@@ -5,8 +5,8 @@ This guide will help you understand our workflow and how you can contribute effe
 ## Branch Structure
 
 ### Main Branches
-- **main**: Production-ready code. Only thoroughly tested and reviewed code gets merged here.
-- **develop**: Staging area for features before they are released to the main branch.
+- **develop**: Default branch for development. All pull requests should be merged here.
+- **main**: Production-ready code. Only thoroughly tested and reviewed code from `develop` gets merged here.
 
 ### Feature Branches
 - Create a new branch for each feature or bug fix. Use the following naming conventions:
@@ -15,7 +15,7 @@ This guide will help you understand our workflow and how you can contribute effe
 
 ### Hotfix and Release Branches
 - **Hotfix Branches:** For critical fixes in production, branch from `main`. Example: `hotfix/critical-issue`.
-- **Release Branches:** For major releases, branch from `develop`. Example: `release/v1.0`.
+- **Release Branches:** For major releases, create a branch from `develop`. Example: `release/v1.0`.
 
 ## Workflow
 
@@ -36,13 +36,34 @@ This guide will help you understand our workflow and how you can contribute effe
 
 5. **Testing and Releases:**
    - Regularly test the `develop` branch.
-   - For a new release, create a release branch: `release/v1.0`.
+   - For a new release, create a release branch: `release/v1.0` from `develop`.
    - Perform final testing and bug fixing on the release branch before merging into `main`.
 
 6. **Hotfixes:**
    - For critical production issues, create a hotfix branch from `main`: `hotfix/critical-issue`.
    - Fix the issue, open a PR, and merge after review and testing.
    - Merge the hotfix branch into `develop` to include the fix in future development.
+
+## Pushing Changes
+
+Before pushing any change to the repository:-
+1. Please make sure you have no uncommited code.
+2. Checkout to main branch and pull it to update it.
+3. Once done, checkout to your branch and rebase it with main branch. Use the command below to rebase:-
+   ```sh
+   git rebase main   
+   ```
+4. Resolve any merge conflicts and then push your branch to the repository.
+   ```sh
+   git push origin bg-your-feature-name
+   ```
+
+## Submitting a Pull Request
+
+1. **Create a pull request**: Go to the repository and click on the "Pull Request" button. Provide a clear and descriptive title for your pull request. In the description, explain what changes you have made and why. Make sure add a reviewer from the top right section.
+2. **Review process**: The reviewer will review your pull request. They may ask for changes or provide feedback. Please be responsive to their comments.
+3. **Merge**: Once your pull request is approved, it will be merged into the main branch.
+
 
 ## Contribution Guidelines
 
@@ -52,8 +73,8 @@ This guide will help you understand our workflow and how you can contribute effe
 
 ## Collaboration Tools
 
-- **GitHub Projects:** We will use GitHub Projects to track progress with a Kanban board.
-- **Continuous Integration (CI):** We will have a CI pipeline set up with GitHub Actions to automatically run tests and checks on each PR.
+- **GitHub Projects:** We use GitHub Projects to track progress with a Kanban board.
+- **Continuous Integration (CI):** We have a CI pipeline set up with GitHub Actions to automatically run tests and checks on each PR.
 
 By following this workflow, we can ensure a smooth and efficient development process. If you have any questions or suggestions, feel free to open an issue or contact a team member.
 
