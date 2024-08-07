@@ -5,8 +5,8 @@ This guide will help you understand our workflow and how you can contribute effe
 ## Branch Structure
 
 ### Main Branches
-- **main**: Production-ready code. Only thoroughly tested and reviewed code gets merged here.
-- **develop**: Staging area for features before they are released to the main branch.
+- **develop**: Default branch for development. All pull requests should be merged here.
+- **main**: Production-ready code. Only thoroughly tested and reviewed code from `develop` gets merged here.
 
 ### Feature Branches
 - Create a new branch for each feature or bug fix. Use the following naming conventions:
@@ -15,7 +15,7 @@ This guide will help you understand our workflow and how you can contribute effe
 
 ### Hotfix and Release Branches
 - **Hotfix Branches:** For critical fixes in production, branch from `main`. Example: `hotfix/critical-issue`.
-- **Release Branches:** For major releases, branch from `develop`. Example: `release/v1.0`.
+- **Release Branches:** For major releases, create a branch from `develop`. Example: `release/v1.0`.
 
 ## Workflow
 
@@ -36,7 +36,7 @@ This guide will help you understand our workflow and how you can contribute effe
 
 5. **Testing and Releases:**
    - Regularly test the `develop` branch.
-   - For a new release, create a release branch: `release/v1.0`.
+   - For a new release, create a release branch: `release/v1.0` from `develop`.
    - Perform final testing and bug fixing on the release branch before merging into `main`.
 
 6. **Hotfixes:**
@@ -52,8 +52,8 @@ This guide will help you understand our workflow and how you can contribute effe
 
 ## Collaboration Tools
 
-- **GitHub Projects:** We will use GitHub Projects to track progress with a Kanban board.
-- **Continuous Integration (CI):** We will have a CI pipeline set up with GitHub Actions to automatically run tests and checks on each PR.
+- **GitHub Projects:** We use GitHub Projects to track progress with a Kanban board.
+- **Continuous Integration (CI):** We have a CI pipeline set up with GitHub Actions to automatically run tests and checks on each PR.
 
 By following this workflow, we can ensure a smooth and efficient development process. If you have any questions or suggestions, feel free to open an issue or contact a team member.
 
