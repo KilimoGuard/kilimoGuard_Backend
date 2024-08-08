@@ -12,12 +12,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+
+import certifi
 from decouple import config
 import mongoengine
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -28,14 +29,14 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-MODE=config("MODE", default="dev")
+MODE = config("MODE", default="dev")
 
-if MODE=='prod':        
-    CORS_ALLOWED_ORIGINS=[config('ALLOWED_HOSTS').split(",")[0]]
-    ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(",")    
+if MODE == 'prod':
+    CORS_ALLOWED_ORIGINS = [config('ALLOWED_HOSTS').split(",")[0]]
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(",")
 else:
     ALLOWED_HOSTS = ["*"]
-    CORS_ORIGIN_ALLOW_ALL = True    
+    CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_METHODS = [
     'POST',
@@ -49,11 +50,11 @@ CORS_ALLOW_METHODS = [
 
 INSTALLED_APPS = [
     "kilimo_guard",
-    "corsheaders",    
-    "rest_framework",           
+    "corsheaders",
+    "rest_framework",
     'rest_framework.authtoken',
-    'rest_framework_mongoengine',   
-
+    'rest_framework_mongoengine',
+    'rest_framework_simplejwt.token_blacklist',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -62,7 +63,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-MIDDLEWARE = [    
+MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -75,9 +76,10 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',            
-        'rest_framework.authentication.TokenAuthentication',        
-        'rest_framework.authentication.SessionAuthentication',                        
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
 
@@ -101,13 +103,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "kilimo_project.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 MONGO_DB_NAME = config("MONGO_DB_NAME")
 MONGO_DB_URI = config("MONGO_DB_URI")
-mongoengine.connect(host=config("MONGO_DB_URI")+"/"+MONGO_DB_NAME, ssl=True)
+mongoengine.connect(host=config("MONGO_DB_URI") + "/" + MONGO_DB_NAME, ssl=True, tlsCAFile=certifi.where())
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -127,6 +128,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -138,7 +146,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
